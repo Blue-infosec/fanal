@@ -17,3 +17,5 @@ vendor
 cmd/fanal/fanal
 *.tar
 *.gz
+*.bkp
+*.db
