@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"testing"
 	"time"
@@ -172,7 +173,8 @@ func setup(b *testing.B, tc testCase, cacheDir string) (context.Context, string,
 	_, err = cli.ImageLoad(ctx, testfile, true)
 	require.NoError(b, err, tc.name)
 
-	imageName := fmt.Sprintf("%s-%s", tc.imageName, nextRandom())
+	rs := rand.NewSource(time.Now().UnixNano())
+	imageName := fmt.Sprintf("%s-%d", tc.imageName, rand.New(rs).Intn(1000000))
 	fmt.Println(imageName)
 
 	// tag our image to something unique
